@@ -1,34 +1,38 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PostsService } from './posts.service';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
+import { ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 
+import { CreatePostDto } from './dto/req/create-post.dto';
+import { PostsService } from './posts.service';
+import { UpdatePostDto } from './dto/req/update-post.dto';
+import { PostsListReqDto } from './dto/req/posts-list.req.dto';
+
+@ApiTags('Posts')
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   @Post()
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
+  public async create(@Body() dto: CreatePostDto): Promise<any> {
+    return await this.postsService.create(dto);
   }
 
   @Get()
-  findAll() {
-    return this.postsService.findAll();
+  public async findAll(@Query() query: PostsListReqDto): Promise<any> {
+    return await this.postsService.findAll(query);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postsService.findOne(+id);
+  public async findOne(@Param('id') id: string): Promise<any> {
+    return await this.postsService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(+id, updatePostDto);
+  public async update(@Param('id') id: string, @Body() dto: UpdatePostDto): Promise<any> {
+    return await this.postsService.update(+id, dto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postsService.remove(+id);
+  public async remove(@Param('id') id: string): Promise<any> {
+    return await this.postsService.remove(+id);
   }
 }
