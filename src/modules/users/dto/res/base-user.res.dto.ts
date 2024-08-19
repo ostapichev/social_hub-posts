@@ -4,6 +4,7 @@ export class BaseUserResDto {
   @ApiProperty({ format: 'uuid' })
   id: string;
 
+  @ApiProperty({ example: 'http://example.com/avatar.png' })
   avatar?: string;
 
   @ApiProperty({ example: 'John Smith'})
@@ -19,5 +20,6 @@ export class BaseUserResDto {
   password: string;
 
   createdAt: Date;
+
   updatedAt: Date;
 }

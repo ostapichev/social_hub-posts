@@ -5,7 +5,7 @@ import { UpdateUserDto } from './dto/req/update-user.dto';
 
 @Injectable()
 export class UsersService {
-  public async create(createUserDto: CreateUserDto): Promise<any> {
+  public async create(dto: CreateUserDto): Promise<any> {
     return 'This action adds a new user';
   }
 
@@ -17,7 +17,7 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  public async updateMe(id: number, updateUserDto: UpdateUserDto): Promise<any> {
+  public async updateMe(id: number, dto: UpdateUserDto): Promise<any> {
     return `This action updates a #${id} user`;
   }
 

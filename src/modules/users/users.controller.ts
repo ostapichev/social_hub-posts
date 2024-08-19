@@ -28,7 +28,7 @@ export class UsersController {
 
   @ApiCreatedResponse({ type: PrivateUserResDto })
   @Post()
-  public async create(@Body() dto: CreateUserDto): Promise<any> {
+  public async create(@Body() dto: CreateUserDto): Promise<PrivateUserResDto> {
     return await this.usersService.create(dto);
   }
 

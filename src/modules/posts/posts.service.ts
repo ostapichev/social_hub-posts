@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+
 import { CreatePostDto } from './dto/req/create-post.dto';
 import { UpdatePostDto } from './dto/req/update-post.dto';
 import { PostsListReqDto } from './dto/req/posts-list.req.dto';
