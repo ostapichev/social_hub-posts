@@ -1,13 +1,15 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
+import { AppConfig } from './config/config.type';
 import { AppModule } from './modules/app.module';
 
 async function bootstrap() {
-  const PORT = 3000;
-  const HOST = 'localhost';
   const app = await NestFactory.create(AppModule);
+  const configService = app.get(ConfigService);
+  const appConfig = configService.get<AppConfig>('app');
   const config = new DocumentBuilder()
     .setTitle('Social hubs: posts')
     .setDescription('The API description')
@@ -34,9 +36,11 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-  await app.listen(PORT, () => {
-    Logger.log(`Server running on http://${HOST}:${PORT}`);
-    Logger.log(`Swagger running on http://${HOST}:${PORT}/docs`);
+  await app.listen(appConfig.port, () => {
+    Logger.log(`Server running on http://${appConfig.host}:${appConfig.port}`);
+    Logger.log(
+      `Swagger running on http://${appConfig.host}:${appConfig.port}/docs`,
+    );
   });
 }
 void bootstrap();
