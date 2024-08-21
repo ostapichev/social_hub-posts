@@ -1,5 +1,4 @@
 import { Transform } from 'class-transformer';
-
 import {
   IsEmail,
   IsNotIn,
@@ -8,6 +7,7 @@ import {
   Length,
   Matches,
 } from 'class-validator';
+
 import { TransformHelper } from '../../../../common/helpers/transform.helper';
 
 export class CreateUserDto {
@@ -37,8 +37,9 @@ export class CreateUserDto {
   @IsNotIn(['password', 'qwe', '123'])
   @IsString()
   @Matches(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\s])\S{8,20}$/, {
-    message: 'The password must be from 8 to 20 characters consisting ' +
-             'of small and large letters, numbers and special characters.',
+    message:
+      'The password must be from 8 to 20 characters consisting ' +
+      'of small and large letters, numbers and special characters.',
   })
   public readonly password: string;
 }
