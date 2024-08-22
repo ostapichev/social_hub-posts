@@ -1,9 +1,10 @@
 import { Global, Module } from '@nestjs/common';
 
 import { ArticleRepository } from './services/article.repository';
+import { CommentRepository } from './services/comment.repository';
 import { UserRepository } from './services/user.repository';
 
-const repositories = [ArticleRepository, UserRepository];
+const repositories = [ArticleRepository, CommentRepository, UserRepository];
 
 @Global()
 @Module({

@@ -1,27 +1,28 @@
 import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
+import {
   ApiBadRequestResponse,
-  ApiCreatedResponse, ApiForbiddenResponse,
+  ApiCreatedResponse,
+  ApiForbiddenResponse,
   ApiNoContentResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  Query,
-} from '@nestjs/common';
 
 import { CreatePostDto } from './dto/req/create-post.dto';
-import { PostsService } from './posts.service';
-import { UpdatePostDto } from './dto/req/update-post.dto';
 import { PostsListReqDto } from './dto/req/posts-list.req.dto';
-import { PublicPostResDto } from './dto/res/public-post.res.dto';
+import { UpdatePostDto } from './dto/req/update-post.dto';
 import { PrivatePostResDto } from './dto/res/private-post.res.dto';
+import { PublicPostResDto } from './dto/res/public-post.res.dto';
+import { PostsService } from './posts.service';
 
 @ApiTags('Posts')
 @ApiForbiddenResponse()
@@ -42,7 +43,8 @@ export class PostsController {
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiBadRequestResponse({ description: 'Bad request' })
   public async findAll(
-    @Query() query: PostsListReqDto): Promise<PublicPostResDto[]> {
+    @Query() query: PostsListReqDto,
+  ): Promise<PublicPostResDto[]> {
     return await this.postsService.findAll(query);
   }
 
@@ -50,7 +52,8 @@ export class PostsController {
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiBadRequestResponse({ description: 'Bad request' })
   public async findOne(
-    @Param('postId') postId: string): Promise<PrivatePostResDto> {
+    @Param('postId') postId: string,
+  ): Promise<PrivatePostResDto> {
     return await this.postsService.findOne(+postId);
   }
 
@@ -60,7 +63,8 @@ export class PostsController {
   @Patch(':postId')
   public async update(
     @Param('postId') postId: string,
-    @Body() dto: UpdatePostDto): Promise<PrivatePostResDto> {
+    @Body() dto: UpdatePostDto,
+  ): Promise<PrivatePostResDto> {
     return await this.postsService.update(+postId, dto);
   }
 

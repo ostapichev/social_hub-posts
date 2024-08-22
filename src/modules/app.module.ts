@@ -4,6 +4,7 @@ import { APP_FILTER } from '@nestjs/core';
 
 import { GlobalExceptionFilter } from '../common/http/global-exception.filter';
 import configuration from '../config/configuration';
+import { CommentsModule } from './comments/comments.module';
 import { LoggerModule } from './logger/logger.module';
 import { PostgresModule } from './postgres/postgres.module';
 import { PostsModule } from './posts/posts.module';
@@ -21,6 +22,7 @@ import { UsersModule } from './users/users.module';
     PostsModule,
     LoggerModule,
     RepositoryModule,
+    CommentsModule,
   ],
   providers: [
     {

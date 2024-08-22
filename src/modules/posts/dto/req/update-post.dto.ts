@@ -1,6 +1,6 @@
 export class UpdatePostDto {
   title?: string;
-  about?: string;
+  description?: string;
   body?: string;
-  tag?: string;
+  tags?: string[];
 }

@@ -12,22 +12,9 @@ import { TransformHelper } from '../../../../common/helpers/transform.helper';
 
 export class CreateUserDto {
   @Transform(TransformHelper.trim)
-  @Transform(TransformHelper.toLowerCase)
-  @IsString()
-  @Length(4, 50)
-  @IsOptional()
-  public readonly avatar?: string;
-
-  @Transform(TransformHelper.trim)
   @IsString()
   @Length(2, 20)
   public readonly name: string;
-
-  @Transform(TransformHelper.trim)
-  @IsString()
-  @Length(2, 20)
-  @IsOptional()
-  public readonly about?: string;
 
   @IsString()
   @IsEmail()
@@ -42,4 +29,17 @@ export class CreateUserDto {
       'of small and large letters, numbers and special characters.',
   })
   public readonly password: string;
+
+  @Transform(TransformHelper.trim)
+  @IsString()
+  @Length(2, 20)
+  @IsOptional()
+  public readonly bio?: string;
+
+  @Transform(TransformHelper.trim)
+  @Transform(TransformHelper.toLowerCase)
+  @IsString()
+  @Length(4, 50)
+  @IsOptional()
+  public readonly image?: string;
 }

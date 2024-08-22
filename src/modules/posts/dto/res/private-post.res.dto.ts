@@ -4,9 +4,9 @@ import { BasePostResDto } from './base-post.res.dto';
 
 export class PrivatePostResDto extends PickType(BasePostResDto, [
   'title',
-  'about',
+  'description',
   'body',
-  'tag',
+  'tags',
   'createdAt',
   'updatedAt',
 ]) {}

@@ -8,13 +8,16 @@ export class BasePostResDto {
   title: string;
 
   @ApiProperty({ example: 'content' })
-  about: string;
+  description: string;
 
   @ApiProperty({ example: 'body' })
   body: string;
 
   @ApiProperty({ example: 'tag' })
-  tag?: string;
+  tags?: string[];
+
+  @ApiProperty({ example: '232esid232343' })
+  user_id: string;
 
   createdAt: Date;
 

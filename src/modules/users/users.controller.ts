@@ -69,6 +69,7 @@ export class UsersController {
     return await this.usersService.updateMe(1, dto);
   }
 
+  @ApiBearerAuth()
   @ApiNoContentResponse({ description: 'User has been removed' })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiBadRequestResponse({ description: 'Bad request' })

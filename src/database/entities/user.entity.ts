@@ -1,6 +1,8 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 
 import { ArticleEntity } from './article.entity';
+import { CommentEntity } from './comment.entity';
+import { FollowEntity } from './follow.entity';
 import { LikeEntity } from './like.entity';
 import { CreateUpdateModel } from './models/create-update.model';
 import { RefreshTokenEntity } from './refresh-token.entity';
@@ -27,6 +29,15 @@ export class UserEntity extends CreateUpdateModel {
 
   @OneToMany(() => ArticleEntity, (entity) => entity.user)
   articles?: ArticleEntity[];
+
+  @OneToMany(() => CommentEntity, (entity) => entity.user)
+  comments?: CommentEntity[];
+
+  @OneToMany(() => FollowEntity, (entity) => entity.follower)
+  follower?: FollowEntity;
+
+  @OneToMany(() => FollowEntity, (entity) => entity.following)
+  following?: FollowEntity[];
 
   @OneToMany(() => RefreshTokenEntity, (entity) => entity.user)
   refreshTokens?: RefreshTokenEntity[];

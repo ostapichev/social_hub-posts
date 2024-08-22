@@ -8,6 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
+import { CommentEntity } from './comment.entity';
 import { LikeEntity } from './like.entity';
 import { CreateUpdateModel } from './models/create-update.model';
 import { TagEntity } from './tag.entity';
@@ -36,4 +37,7 @@ export class ArticleEntity extends CreateUpdateModel {
   @ManyToMany(() => TagEntity, (entity) => entity.articles)
   @JoinTable()
   tags?: TagEntity[];
+
+  @OneToMany(() => CommentEntity, (entity) => entity.articles)
+  comments?: CommentEntity[];
 }
