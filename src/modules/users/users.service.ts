@@ -14,11 +14,7 @@ export class UsersService {
 
   public async create(dto: CreateUserDto): Promise<any> {
     Logger.log(dto);
-    return await this.userRepository.save({
-      name: 'John Doe',
-      email: 'test.@test.com',
-      password: 'password123',
-    });
+    return await this.userRepository.save(dto);
   }
 
   public async findAll(): Promise<any> {

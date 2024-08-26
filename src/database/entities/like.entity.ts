@@ -1,10 +1,11 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 import { ArticleEntity } from './article.entity';
+import { TableNameEnum } from './enums/table-name.enum';
 import { CreateUpdateModel } from './models/create-update.model';
 import { UserEntity } from './user.entity';
 
-@Entity('likes')
+@Entity(TableNameEnum.LIKES)
 export class LikeEntity extends CreateUpdateModel {
   @Column()
   user_id: string;

@@ -1,9 +1,10 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
+import { TableNameEnum } from './enums/table-name.enum';
 import { CreateUpdateModel } from './models/create-update.model';
 import { UserEntity } from './user.entity';
 
-@Entity('follow')
+@Entity(TableNameEnum.FOLLOWS)
 export class FollowEntity extends CreateUpdateModel {
   @Column()
   follower_id: string;

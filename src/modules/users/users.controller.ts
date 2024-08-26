@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Logger,
   Param,
   Patch,
   Post,
@@ -38,6 +39,7 @@ export class UsersController {
     @Req() req: Request,
     @Body() dto: CreateUserDto,
   ): Promise<PrivateUserResDto> {
+    Logger.log(req.body);
     return await this.usersService.create(dto);
   }
 
