@@ -1,8 +1,7 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { ConflictException, Injectable, Logger } from '@nestjs/common';
 
 import { LoggerService } from '../logger/logger.service';
 import { UserRepository } from '../repository/services/user.repository';
-import { CreateUserDto } from './dto/req/create-user.dto';
 import { UpdateUserDto } from './dto/req/update-user.dto';
 
 @Injectable()
@@ -11,11 +10,6 @@ export class UsersService {
     private readonly logger: LoggerService,
     private readonly userRepository: UserRepository,
   ) {}
-
-  public async create(dto: CreateUserDto): Promise<any> {
-    Logger.log(dto);
-    return await this.userRepository.save(dto);
-  }
 
   public async findAll(): Promise<any> {
     return `This action returns all users`;
@@ -36,5 +30,12 @@ export class UsersService {
 
   public async findOne(id: number): Promise<any> {
     return `This action returns a #${id} user`;
+  }
+
+  public async isEmailExistOrThrow(email: string): Promise<void> {
+    const user = await this.userRepository.findOneBy({ email });
+    if (user) {
+      throw new ConflictException('Email already exists');
+    }
   }
 }

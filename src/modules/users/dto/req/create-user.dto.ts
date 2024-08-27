@@ -6,12 +6,15 @@ import {
   IsString,
   Length,
   Matches,
+  ValidateIf,
 } from 'class-validator';
 
 import { TransformHelper } from '../../../../common/helpers/transform.helper';
+import { AgeValid } from '../../decorators/age-valid.decorator';
 
 export class CreateUserDto {
   @Transform(TransformHelper.trim)
+  @Transform(TransformHelper.toLowerCase)
   @IsString()
   @Length(2, 20)
   public readonly name: string;
@@ -23,23 +26,17 @@ export class CreateUserDto {
   @Transform(TransformHelper.trim)
   @IsNotIn(['password', 'qwe', '123'])
   @IsString()
-  @Matches(/^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\s])\S{8,20}$/, {
-    message:
-      'The password must be from 8 to 20 characters consisting ' +
-      'of small and large letters, numbers and special characters.',
+  @Matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, {
+    message: 'Incorrect password',
   })
   public readonly password: string;
 
-  @Transform(TransformHelper.trim)
-  @IsString()
-  @Length(2, 20)
-  @IsOptional()
-  public readonly bio?: string;
+  @AgeValid()
+  public readonly age: number;
 
   @Transform(TransformHelper.trim)
-  @Transform(TransformHelper.toLowerCase)
   @IsString()
-  @Length(4, 50)
+  @ValidateIf((obj) => obj.age === 35)
   @IsOptional()
-  public readonly image?: string;
+  public readonly phone?: string;
 }

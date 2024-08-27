@@ -1,7 +1,13 @@
+import { IsOptional } from 'class-validator';
+
+import { AgeValid } from '../../decorators/age-valid.decorator';
+
 export class UpdateUserDto {
   name?: string;
-  email?: string;
-  password?: string;
-  bio?: string;
-  image?: string;
+
+  @AgeValid()
+  @IsOptional()
+  public readonly age?: number;
+
+  phone?: string;
 }
