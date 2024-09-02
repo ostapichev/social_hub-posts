@@ -1,10 +1,5 @@
 import { Body, Controller, Param, Patch, Post } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiNotFoundResponse,
-  ApiTags,
-  ApiUnauthorizedResponse,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiNotFoundResponse, ApiTags } from '@nestjs/swagger';
 
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { IUserData } from '../auth/interfaces/user-data.interface';
@@ -20,7 +15,6 @@ export class ArticleController {
   constructor(private readonly service: ArticleService) {}
 
   @ApiBearerAuth()
-  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   @Post()
   public async create(
     @CurrentUser() userData: IUserData,
@@ -31,7 +25,6 @@ export class ArticleController {
   }
 
   @ApiBearerAuth()
-  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
   @ApiNotFoundResponse({ description: 'Not Found' })
   @Patch(':articleId')
   public async update(

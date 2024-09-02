@@ -4,9 +4,9 @@ import {
   Delete,
   Get,
   Param,
+  ParseUUIDPipe,
   Patch,
   Post,
-  Req,
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -17,9 +17,12 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 
+import { CommentEntity } from '../../database/entities/comment.entity';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { SkipAuth } from '../auth/decorators/skip-auth.decorator';
+import { IUserData } from '../auth/interfaces/user-data.interface';
 import { CommentsService } from './comments.service';
-import { CreateCommentDto } from './dto/req/create-comment.dto';
-import { UpdateCommentDto } from './dto/req/update-comment.dto';
+import { CommentDto } from './dto/req/comment.dto';
 import { PrivateCommentResDto } from './dto/res/private-comment.res.dto';
 
 @ApiTags('Comments')
@@ -32,34 +35,33 @@ export class CommentsController {
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiBadRequestResponse({ description: 'Bad request' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
-  @Post()
+  @Post(':articleId')
   public async create(
-    @Req() req: Request,
-    @Body() dto: CreateCommentDto,
-  ): Promise<PrivateCommentResDto> {
-    return await this.commentsService.create(dto);
+    @Body() dto: CommentDto,
+    @CurrentUser() userData: IUserData,
+    @Param('articleId', new ParseUUIDPipe()) articleId: string,
+  ): Promise<CommentEntity> {
+    return await this.commentsService.create(dto, userData, articleId);
   }
 
-  @Get()
+  @Get(':articleId')
+  @SkipAuth()
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiBadRequestResponse({ description: 'Bad request' })
-  public async findAll() {
-    return await this.commentsService.findAll();
+  public async findAllArticle(
+    @Param('articleId', new ParseUUIDPipe()) articleId: string,
+  ) {
+    return await this.commentsService.findAllArticle(articleId);
   }
 
-  @Get(':commentId')
-  @ApiForbiddenResponse({ description: 'Forbidden' })
-  @ApiBadRequestResponse({ description: 'Bad request' })
-  public async findOne(@Param('commentId') commentId: string) {
-    return await this.commentsService.findOne(+commentId);
-  }
-
-  @ApiUnauthorizedResponse({ description: 'Unauthorized' })
-  @ApiForbiddenResponse({ description: 'Forbidden' })
-  @ApiBadRequestResponse({ description: 'Bad request' })
   @Patch(':commentId')
-  update(@Param('commentId') commentId: string, @Body() dto: UpdateCommentDto) {
-    return this.commentsService.update(+commentId, dto);
+  @ApiForbiddenResponse({ description: 'Forbidden' })
+  @ApiBadRequestResponse({ description: 'Bad request' })
+  update(
+    @Param('commentId', new ParseUUIDPipe()) commentId: string,
+    @Body() dto: CommentDto,
+  ) {
+    return this.commentsService.update(commentId, dto);
   }
 
   @ApiNoContentResponse({ description: 'Post has been removed' })

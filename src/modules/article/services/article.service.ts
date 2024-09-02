@@ -21,7 +21,6 @@ export class ArticleService {
     dto: CreateArticleReqDto,
   ): Promise<ArticleEntity> {
     const tags = await this.createTags(dto.tags);
-
     return await this.articleRepository.save(
       this.articleRepository.create({
         ...dto,
