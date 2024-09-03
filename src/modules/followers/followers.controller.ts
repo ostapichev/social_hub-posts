@@ -19,7 +19,7 @@ import {
 import { CreateFollowerDto } from './dto/req/create-follower.dto';
 import { UpdateFollowerDto } from './dto/req/update-follower.dto';
 import { PublicFollowResDto } from './dto/res/public-follow.res.dto';
-import { FollowersService } from './followers.service';
+import { FollowersService } from './services/followers.service';
 
 @ApiTags('Followers')
 @ApiForbiddenResponse()

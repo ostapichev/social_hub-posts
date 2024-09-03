@@ -3,8 +3,10 @@ import { PickType } from '@nestjs/swagger';
 import { BaseCommentResDto } from './base-comment.res.dto';
 
 export class PublicCommentResDto extends PickType(BaseCommentResDto, [
+  'id',
   'body',
-  'article_id',
   'user_id',
-  'updatedAt',
+  'article_id',
+  'created',
+  'updated',
 ]) {}

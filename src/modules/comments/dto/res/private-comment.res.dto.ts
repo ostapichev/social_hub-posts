@@ -7,6 +7,6 @@ export class PrivateCommentResDto extends PickType(BaseCommentResDto, [
   'body',
   'article_id',
   'user_id',
-  'createdAt',
-  'updatedAt',
+  'created',
+  'updated',
 ]) {}

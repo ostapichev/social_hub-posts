@@ -4,7 +4,7 @@ import Redis from 'ioredis';
 
 import { Config, RedisConfig } from '../../config/config.type';
 import { REDIS_CLIENT } from './redis.constants';
-import { RedisService } from './redis.service';
+import { RedisService } from './services/redis.service';
 
 const redisProvider: Provider = {
   useFactory: (configService: ConfigService<Config>): Redis => {

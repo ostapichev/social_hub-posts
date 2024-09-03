@@ -1,9 +1,9 @@
 import { Injectable, Logger } from '@nestjs/common';
 
-import { LoggerService } from '../logger/logger.service';
-import { FollowRepository } from '../repository/services/follow.repository';
-import { CreateFollowerDto } from './dto/req/create-follower.dto';
-import { UpdateFollowerDto } from './dto/req/update-follower.dto';
+import { LoggerService } from '../../logger/services/logger.service';
+import { FollowRepository } from '../../repository/services/follow.repository';
+import { CreateFollowerDto } from '../dto/req/create-follower.dto';
+import { UpdateFollowerDto } from '../dto/req/update-follower.dto';
 
 @Injectable()
 export class FollowersService {

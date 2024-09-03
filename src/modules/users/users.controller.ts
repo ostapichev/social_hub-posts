@@ -25,8 +25,8 @@ import { SkipAuth } from '../auth/decorators/skip-auth.decorator';
 import { IUserData } from '../auth/interfaces/user-data.interface';
 import { UpdateUserDto } from './dto/req/update-user.dto';
 import { UserResDto } from './dto/res/user.res.dto';
-import { UserMapper } from './user.mapper';
-import { UsersService } from './users.service';
+import { UserMapper } from './services/user.mapper';
+import { UsersService } from './services/users.service';
 
 @ApiTags('Users')
 @Controller('users')

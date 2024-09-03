@@ -1,10 +1,10 @@
 import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 
-import { CommentEntity } from '../../database/entities/comment.entity';
-import { IUserData } from '../auth/interfaces/user-data.interface';
-import { ArticleRepository } from '../repository/services/article.repository';
-import { CommentRepository } from '../repository/services/comment.repository';
-import { CommentDto } from './dto/req/comment.dto';
+import { CommentEntity } from '../../../database/entities/comment.entity';
+import { IUserData } from '../../auth/interfaces/user-data.interface';
+import { ArticleRepository } from '../../repository/services/article.repository';
+import { CommentRepository } from '../../repository/services/comment.repository';
+import { CommentDto } from '../dto/req/comment.dto';
 
 @Injectable()
 export class CommentsService {

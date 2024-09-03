@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiForbiddenResponse,
   ApiNoContentResponse,
@@ -21,9 +22,10 @@ import { CommentEntity } from '../../database/entities/comment.entity';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { SkipAuth } from '../auth/decorators/skip-auth.decorator';
 import { IUserData } from '../auth/interfaces/user-data.interface';
-import { CommentsService } from './comments.service';
 import { CommentDto } from './dto/req/comment.dto';
 import { PrivateCommentResDto } from './dto/res/private-comment.res.dto';
+import { CommentMapper } from './services/comment.mapper';
+import { CommentsService } from './services/comments.service';
 
 @ApiTags('Comments')
 @ApiForbiddenResponse()
@@ -31,17 +33,19 @@ import { PrivateCommentResDto } from './dto/res/private-comment.res.dto';
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
+  @Post(':articleId')
+  @ApiBearerAuth()
   @ApiCreatedResponse({ type: PrivateCommentResDto })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiBadRequestResponse({ description: 'Bad request' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
-  @Post(':articleId')
   public async create(
     @Body() dto: CommentDto,
     @CurrentUser() userData: IUserData,
     @Param('articleId', new ParseUUIDPipe()) articleId: string,
   ): Promise<CommentEntity> {
-    return await this.commentsService.create(dto, userData, articleId);
+    const comment = await this.commentsService.create(dto, userData, articleId);
+    return CommentMapper.toResponseDTO(comment);
   }
 
   @Get(':articleId')
@@ -55,6 +59,7 @@ export class CommentsController {
   }
 
   @Patch(':commentId')
+  @ApiBearerAuth()
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiBadRequestResponse({ description: 'Bad request' })
   update(
@@ -64,11 +69,12 @@ export class CommentsController {
     return this.commentsService.update(commentId, dto);
   }
 
+  @Delete(':commentId')
+  @ApiBearerAuth()
   @ApiNoContentResponse({ description: 'Post has been removed' })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiBadRequestResponse({ description: 'Bad request' })
   @ApiUnauthorizedResponse({ description: 'Unauthorized' })
-  @Delete(':commentId')
   remove(@Param('commentId') commentId: string) {
     return this.commentsService.remove(+commentId);
   }

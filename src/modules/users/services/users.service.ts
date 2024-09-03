@@ -4,14 +4,14 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 
-import { UserEntity } from '../../database/entities/user.entity';
-import { ArticleService } from '../article/services/article.service';
-import { IUserData } from '../auth/interfaces/user-data.interface';
-import { AuthCacheService } from '../auth/services/auth-cache.service';
-import { LoggerService } from '../logger/logger.service';
-import { FollowRepository } from '../repository/services/follow.repository';
-import { UserRepository } from '../repository/services/user.repository';
-import { UpdateUserDto } from './dto/req/update-user.dto';
+import { UserEntity } from '../../../database/entities/user.entity';
+import { ArticleService } from '../../article/services/article.service';
+import { IUserData } from '../../auth/interfaces/user-data.interface';
+import { AuthCacheService } from '../../auth/services/auth-cache.service';
+import { LoggerService } from '../../logger/services/logger.service';
+import { FollowRepository } from '../../repository/services/follow.repository';
+import { UserRepository } from '../../repository/services/user.repository';
+import { UpdateUserDto } from '../dto/req/update-user.dto';
 
 @Injectable()
 export class UsersService {
