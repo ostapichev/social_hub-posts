@@ -7,6 +7,7 @@ import configuration from '../config/configuration';
 import { ArticleModule } from './article/article.module';
 import { AuthModule } from './auth/auth.module';
 import { CommentsModule } from './comments/comments.module';
+import { FileStorageModule } from './file-storage/file-storage.module';
 import { FollowersModule } from './followers/followers.module';
 import { LikesModule } from './likes/likes.module';
 import { LoggerModule } from './logger/logger.module';
@@ -33,6 +34,7 @@ import { UsersModule } from './users/users.module';
     TagModule,
     RedisModule,
     LikesModule,
+    FileStorageModule,
   ],
   providers: [
     {

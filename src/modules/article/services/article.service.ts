@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { In } from 'typeorm';
 
 import { ArticleEntity } from '../../../database/entities/article.entity';
@@ -8,6 +8,7 @@ import { ArticleRepository } from '../../repository/services/article.repository'
 import { TagRepository } from '../../repository/services/tag.repository';
 import { ArticleListQueryDto } from '../dto/req/article-list.query.dto';
 import { CreateArticleReqDto } from '../dto/req/create-article.req.dto';
+import { UpdateArticleReqDto } from '../dto/req/update-article.req.dto';
 
 @Injectable()
 export class ArticleService {
@@ -38,7 +39,19 @@ export class ArticleService {
     );
   }
 
-  public async update(userData: IUserData, articleId: string): Promise<any> {
+  public async getById(
+    userData: IUserData,
+    articleId: string,
+  ): Promise<ArticleEntity> {
+    return await this.articleRepository.getById(userData.userId, articleId);
+  }
+
+  public async update(
+    userData: IUserData,
+    articleId: string,
+    dto: UpdateArticleReqDto,
+  ): Promise<any> {
+    Logger.log(dto);
     return `This action updates a #${articleId} car`;
   }
 

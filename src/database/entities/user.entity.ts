@@ -28,18 +28,18 @@ export class UserEntity extends CreateUpdateModel {
   @OneToMany(() => LikeEntity, (entity) => entity.user)
   likes?: LikeEntity[];
 
-  @OneToMany(() => ArticleEntity, (entity) => entity.user)
-  articles?: ArticleEntity[];
-
   @OneToMany(() => CommentEntity, (entity) => entity.user)
   comments?: CommentEntity[];
 
-  @OneToMany(() => FollowEntity, (entity) => entity.follower)
-  follower?: FollowEntity;
-
-  @OneToMany(() => FollowEntity, (entity) => entity.following)
-  following?: FollowEntity[];
+  @OneToMany(() => ArticleEntity, (entity) => entity.user)
+  articles?: ArticleEntity[];
 
   @OneToMany(() => RefreshTokenEntity, (entity) => entity.user)
   refreshTokens?: RefreshTokenEntity[];
+
+  @OneToMany(() => FollowEntity, (entity) => entity.followers)
+  followers?: FollowEntity[];
+
+  @OneToMany(() => FollowEntity, (entity) => entity.followings)
+  followings?: FollowEntity[];
 }

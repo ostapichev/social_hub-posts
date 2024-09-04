@@ -15,7 +15,7 @@ export class ArticleListQueryDto {
   @IsInt()
   @Min(0)
   @IsOptional()
-  offset?: number = 1;
+  offset?: number = 0;
 
   @IsString()
   @IsOptional()

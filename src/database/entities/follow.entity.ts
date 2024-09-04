@@ -8,13 +8,13 @@ import { UserEntity } from './user.entity';
 export class FollowEntity extends CreateUpdateModel {
   @Column()
   follower_id: string;
-  @ManyToOne(() => UserEntity, (entity) => entity.follower)
+  @ManyToOne(() => UserEntity, (entity) => entity.followers)
   @JoinColumn({ name: 'follower_id' })
-  follower?: UserEntity;
+  followers?: UserEntity;
 
   @Column()
   following_id: string;
-  @ManyToOne(() => UserEntity, (entity) => entity.following)
+  @ManyToOne(() => UserEntity, (entity) => entity.followings)
   @JoinColumn({ name: 'following_id' })
-  following?: UserEntity;
+  followings?: UserEntity;
 }
