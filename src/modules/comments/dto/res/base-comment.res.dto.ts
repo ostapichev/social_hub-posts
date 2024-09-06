@@ -8,6 +8,12 @@ export class BaseCommentResDto {
   id: string;
 
   @ApiProperty({
+    example: 'title',
+    description: 'This is your title of the comment here',
+  })
+  title: string;
+
+  @ApiProperty({
     example: 'text text',
     description: 'This is your comment here',
   })

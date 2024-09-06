@@ -29,6 +29,9 @@ export class ArticleEntity extends CreateUpdateModel {
   @OneToMany(() => LikeEntity, (entity) => entity.article)
   likes?: LikeEntity[];
 
+  @OneToMany(() => CommentEntity, (entity) => entity.article)
+  comments?: CommentEntity[];
+
   @Column()
   user_id: string;
   @ManyToOne(() => UserEntity, (entity) => entity.articles)
@@ -38,7 +41,4 @@ export class ArticleEntity extends CreateUpdateModel {
   @ManyToMany(() => TagEntity, (entity) => entity.articles)
   @JoinTable()
   tags?: TagEntity[];
-
-  @OneToMany(() => CommentEntity, (entity) => entity.articles)
-  comments?: CommentEntity[];
 }

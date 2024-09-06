@@ -10,6 +10,9 @@ export class CommentEntity extends CreateUpdateModel {
   @Column('text')
   body: string;
 
+  @Column('text')
+  title: string;
+
   @Column()
   user_id: string;
   @ManyToOne(() => UserEntity, (entity) => entity.comments)
@@ -20,5 +23,5 @@ export class CommentEntity extends CreateUpdateModel {
   article_id: string;
   @ManyToOne(() => ArticleEntity, (entity) => entity.comments)
   @JoinColumn({ name: 'article_id' })
-  articles?: ArticleEntity;
+  article?: ArticleEntity;
 }

@@ -9,7 +9,6 @@ import { AuthModule } from './auth/auth.module';
 import { CommentsModule } from './comments/comments.module';
 import { FileStorageModule } from './file-storage/file-storage.module';
 import { FollowersModule } from './followers/followers.module';
-import { LikesModule } from './likes/likes.module';
 import { LoggerModule } from './logger/logger.module';
 import { PostgresModule } from './postgres/postgres.module';
 import { RedisModule } from './redis/redis.module';
@@ -33,7 +32,6 @@ import { UsersModule } from './users/users.module';
     FollowersModule,
     TagModule,
     RedisModule,
-    LikesModule,
     FileStorageModule,
   ],
   providers: [

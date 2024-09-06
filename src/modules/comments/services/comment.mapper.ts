@@ -18,6 +18,7 @@ export class CommentMapper {
   public static toResponseDTO(entity: CommentEntity): PublicCommentResDto {
     return {
       id: entity.id,
+      title: entity.title,
       body: entity.body,
       user_id: entity.user_id,
       article_id: entity.article_id,
